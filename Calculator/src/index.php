@@ -1,7 +1,7 @@
 <?php
 
 
-require_once '/Classes/Calculator.php';
+require __DIR__ . '/Classes/Calculator.php';
 
 
 $calculator = new Calculator($operand1, $operand2);
