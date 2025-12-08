@@ -1,0 +1,15 @@
+{
+    "name": "demon/calculator",
+    "autoload": {
+        "psr-4": {
+            "Project_calculator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Erkin-Yilmaz",
+            "email": "9024439@student.tcrmbo.nl"
+        }
+    ],
+    "require": {}
+}

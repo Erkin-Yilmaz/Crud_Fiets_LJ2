@@ -1,5 +1,5 @@
 <?php
-
+namespace Project_calculator\Classes;
 class Calculator {
     private float $operand1;
     private float $operand2;
@@ -24,7 +24,6 @@ class Calculator {
 
     
 }
-$operand1 = isset($_GET['operand1']) ? (float)$_GET['operand1'] : 8;
-$operand2 = isset($_GET['operand2']) ? (float)$_GET['operand2'] : 98;
+
 
 ?>

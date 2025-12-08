@@ -1,10 +1,9 @@
 <?php
 
+require_once '../vendor/autoload.php';
+use Project_calculator\Classes\Calculator;
 
-require __DIR__ . '/Classes/Calculator.php';
-
-
-$calculator = new Calculator($operand1, $operand2);
+$calculator = new Calculator(8, 98);
 echo "The result is: " . $calculator->GetResult();
 
 ?>
