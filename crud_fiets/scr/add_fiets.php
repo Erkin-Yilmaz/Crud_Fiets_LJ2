@@ -7,18 +7,6 @@ use Demon\CrudFiets\Database;
 
 $controller = new FietsController(new Database());
 
-$id = $_GET['id'] ?? null;
-if (!$id) {
-    echo "<script>alert('Geen fiets ID opgegeven.'); window.location.href = 'index.php';</script>";
-    exit;
-}
-
-$fiets = $controller->getFietsById($id);
-if (!$fiets) {
-    echo "<script>alert('Fiets niet gevonden.'); window.location.href = 'index.php';</script>";
-    exit;
-}
-
 $successMessage = '';
 $errorMessage = '';
 
@@ -28,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
     $prijs = trim($_POST['prijs'] ?? '');
 
     if (!empty($merk) && !empty($type) && !empty($prijs)) {
-        if ($controller->updateFiets($id, $merk, $type, $prijs)) {
-            $successMessage = 'Fiets succesvol bijgewerkt!';
+        if ($controller->createFiets($merk, $type, $prijs)) {
+            $successMessage = 'Fiets succesvol toegevoegd!';
         } else {
-            $errorMessage = 'Er is een fout opgetreden bij het bijwerken van de fiets.';
+            $errorMessage = 'Er is een fout opgetreden bij het toevoegen van de fiets.';
         }
     } else {
         $errorMessage = 'Alle velden moeten worden ingevuld.';
@@ -45,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wijzig fiets</title>
+    <title>Voeg een fiets toe</title>
 </head>
 <body>
-    <h1>Wijzig fiets</h1>
+    <h1>Voeg een nieuwe fiets toe</h1>
 
     <?php if ($successMessage): ?>
         <script>alert('<?= $successMessage ?>'); window.location.href = 'index.php';</script>
@@ -58,15 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 
     <form method="post">
         <label for="merk">Merk:</label>
-        <input type="text" id="merk" name="merk" value="<?= htmlspecialchars($fiets['merk']) ?>" required><br>
+        <input type="text" id="merk" name="merk" required><br>
 
         <label for="type">Type:</label>
-        <input type="text" id="type" name="type" value="<?= htmlspecialchars($fiets['type']) ?>" required><br>
+        <input type="text" id="type" name="type" required><br>
 
         <label for="prijs">Prijs:</label>
-        <input type="number" id="prijs" name="prijs" value="<?= htmlspecialchars($fiets['prijs']) ?>" required><br>
+        <input type="number" id="prijs" name="prijs" required><br>
 
-        <button type="submit">Wijzigen</button>
+        <button type="submit">Toevoegen</button>
     </form>
     <br>
     <a href="index.php">Terug naar overzicht</a>

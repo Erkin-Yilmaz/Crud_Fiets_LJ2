@@ -13,13 +13,24 @@
     // auteur: Vul hier je naam in   
 
     // Initialisatie
-    include 'functions.php';
+    
+    require_once __DIR__ . '/../vendor/autoload.php';
+
+    use Demon\CrudFiets\FietsController;
+    use Demon\CrudFiets\Database;
+    use Demon\CrudFiets\TableRenderer;
+
+    $controller = new FietsController(new Database());
 
     // Main
-
-    // Aanroep functie 
-    crudMain();
+    $result = $controller->getAllFietsen();
+    TableRenderer::printCrudTabel($result);
     ?>
+
+    <br>
+    <form method="post" action="add_fiets.php">
+        <button type="submit">Voeg een fiets toe</button>
+    </form>
 
 </body>
 </html>
